@@ -3,23 +3,35 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  state={
+    numbers:[]
+  }
+  componentWillMount() {
+    let {numbers} = this.state
+    for(let i = 0; i<100;i++){
+      numbers.push(i)
+    }
+    this.setState({numbers})
+  }
+
+  drawNumbers = ()=>{
+    let {numbers} = this.state
+    return numbers.map((e,i)=> {
+          switch (true) {
+            case e%3 == 0:
+              return <div>Fizz</div>
+            default :
+              return <div>{e}</div>
+          }
+        }
+    )
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        Home app
+        {this.drawNumbers()}
       </div>
     );
   }
