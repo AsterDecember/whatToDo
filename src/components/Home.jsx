@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {fetchData} from '../actions/exampleActions';
+import {getDataSaga} from '../actions/exampleSagaAction';
 
 class Home extends Component{
     componentDidMount() {
@@ -15,7 +16,8 @@ class Home extends Component{
         return(
             <div>
                 Home
-                <Button variant="contained" onClick={this.triggerAction}  >
+                <input/>
+                <Button variant="contained" onClick={this.props.getDataSaga}  >
                     GO
                 </Button>
             </div>
@@ -40,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
 
     return bindActionCreators({
         fetchData,
+        getDataSaga
     }, dispatch);
 
 };
