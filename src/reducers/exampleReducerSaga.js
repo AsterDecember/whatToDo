@@ -1,4 +1,3 @@
-import {GET_DATA_SAGA} from "../actions/exampleSagaAction";
 import {FETCH_DATA_SAGA} from "../actions/exampleSagaAction";
 
 const exampleDataSaga = (state = {}, action) => {
