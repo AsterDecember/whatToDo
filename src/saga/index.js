@@ -1,8 +1,13 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import {GET_DATA_SAGA,fetchDataSaga} from "../actions/exampleSagaAction";
-import {getEventbriteperCategory, getMeetup} from '../middleware/events'
+import {getEventbriteperCategory, getMeetup, getMeetupperCategory} from '../middleware/events'
 import {getEventbrite} from '../middleware/events'
-import {GET_MEETUP_SAGA,fetchMeetupSaga} from '../actions/meetup/meetupActions'
+import {
+    GET_MEETUP_SAGA,
+    fetchMeetupSaga,
+    fetchMeetupEventsSaga,
+    GET_MEETUP_EVENTS_SAGA
+} from '../actions/meetup/meetupActions'
 import {
     GET_EVENTBRITE_SAGA,
     fetchEventbriteSaga,
@@ -73,7 +78,15 @@ function* getEventbritePerCategory(id){
     }catch (e) {
         console.log(e)
     }
+}
 
+function * getMeetupPerCategory(id){
+    try{
+        const {data} = yield call(getMeetupperCategory,id.payload)
+        yield put(fetchMeetupEventsSaga(data))
+    }catch (e) {
+        console.log(e)
+    }
 }
 
 //Wait to load all functions
@@ -92,12 +105,17 @@ function* loadEventbrite() {
 function* loadEventbriteEvents() {
     yield takeEvery(GET_EVENTBRITE_EVENTS_SAGA,getEventbritePerCategory)
 }
+
+function* loadMeetupEvents() {
+    yield takeEvery(GET_MEETUP_EVENTS_SAGA,getMeetupPerCategory)
+}
 function* rootSaga() {
     yield all([
         loadSignup(),
         loadMeetup(),
         loadEventbrite(),
-        loadEventbriteEvents()
+        loadEventbriteEvents(),
+        loadMeetupEvents()
     ]);
 }
 

@@ -1,13 +1,6 @@
 import axios from 'axios';
-import eventbrite from 'eventbrite';
-
 const host = 'https://api.meetup.com/2/events'
 
-// Create configured Eventbrite SDK
-const sdk = eventbrite({
-    token: 'OYNITYQ6UQJDJMWBLDNT',
-    baseUrl: 'https://www.eventbriteapi.com/v3/',
-});
 
 export const getMeetup = ()=>{
 
@@ -39,6 +32,14 @@ export const  getEventbriteperCategory = (id) => {
     const token = 'OYNITYQ6UQJDJMWBLDNT'
     //this thing actually works
     return axios.get(`https://www.eventbriteapi.com/v3/events/search/?q=cdmx&categories=${id}&sort_by=date&token=OYNITYQ6UQJDJMWBLDNT&locale=es_ES`)
+        .then(r=>r)
+        .catch(e=>console.log(e))
+}
+
+export const getMeetupperCategory = (id) => {
+    console.log('meetup')
+    const key = '5f27501b5144525025305c4d3e2e4a1f'
+    return axios.get(`https://api.meetup.com/2/open_events.xml?text='Science & Technology'&state=mx&lat=19.43000030517578&lon=-99.13999938964844&key=${key}`)
         .then(r=>r)
         .catch(e=>console.log(e))
 }

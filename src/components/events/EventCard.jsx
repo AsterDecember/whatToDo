@@ -7,9 +7,9 @@ const EventCard = (props) => {
     const renderEvents = () => {
         const {events} = props
         return  events ? events.map((e) =>
-            <Col span={8}>
+            <Col key={e.id} span={8}>
                 <Card
-                    key={e.id}
+
                     hoverable
                     style={{ width: 240 }}
                     cover={<img alt={e.name} src={e.logo ? e.logo.url:'https://www.freeiconspng.com/uploads/no-image-icon-15.png'} />}
