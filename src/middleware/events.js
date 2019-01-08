@@ -1,6 +1,13 @@
 import axios from 'axios';
+import eventbrite from 'eventbrite';
 
 const host = 'https://api.meetup.com/2/events'
+
+// Create configured Eventbrite SDK
+const sdk = eventbrite({
+    token: 'OYNITYQ6UQJDJMWBLDNT',
+    baseUrl: 'https://www.eventbriteapi.com/v3/',
+});
 
 export const getMeetup = ()=>{
 
@@ -13,7 +20,7 @@ export const getMeetup = ()=>{
             console.log(data);
         });
 }
-
+//https://www.eventbriteapi.com/v3/events/search?location.longitude=-99.1332&location.latitude=19.4326&categories=113
 export const getEventbrite = ()=>{
     const token = 'OYNITYQ6UQJDJMWBLDNT'
     //this thing actually works
@@ -27,15 +34,12 @@ export const getEventbrite = ()=>{
         .catch(e=>console.log(e))
 }
 
-export const  getEventbriteperCAtegory= () => {
+export const  getEventbriteperCategory = (id) => {
+    console.log('sdk')
     const token = 'OYNITYQ6UQJDJMWBLDNT'
     //this thing actually works
-    return axios.get('https://www.eventbriteapi.com/v3/venues/100/events/',
-        {
-            headers: {
-                Authorization: "Bearer " + token,
-            }
-        })
+    return axios.get(`https://www.eventbriteapi.com/v3/events/search/?q=cdmx&categories=${id}&sort_by=date&token=OYNITYQ6UQJDJMWBLDNT&locale=es_ES`)
         .then(r=>r)
         .catch(e=>console.log(e))
 }
+

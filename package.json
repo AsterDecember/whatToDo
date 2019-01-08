@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.7.0",
+    "antd": "^3.12.1",
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
+    "eventbrite": "^1.0.4",
     "http-proxy-middleware": "^0.19.1",
     "proxy": "http://localhost:3001",
     "react": "^16.6.3",

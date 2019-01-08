@@ -1,14 +1,13 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
-//actions
-//import {fetchAllGifs,LOAD_All_GIFS} from "../actions/allGifs";
-//import {fetchSearchGifs,LOAD_SEARCH_GIFS} from "../actions/searchGifs";
 import {GET_DATA_SAGA,fetchDataSaga} from "../actions/exampleSagaAction";
-//const host = 'http://localhost:3000/api'
-import {getMeetup} from '../middleware/events'
+import {getEventbriteperCategory, getMeetup} from '../middleware/events'
 import {getEventbrite} from '../middleware/events'
 import {GET_MEETUP_SAGA,fetchMeetupSaga} from '../actions/meetup/meetupActions'
-import {GET_EVENTBRITE_SAGA,fetchEventbriteSaga} from "../actions/eventbrite/eventbriteActions";
-import axios from "axios";
+import {
+    GET_EVENTBRITE_SAGA,
+    fetchEventbriteSaga,
+    fetchEventbriteEventsSaga, GET_EVENTBRITE_EVENTS_SAGA
+} from "../actions/eventbrite/eventbriteActions";
 
 function* loginSaga() {
     try{
@@ -64,6 +63,19 @@ function* getEventbriteData() {
 
 }
 
+function* getEventbritePerCategory(id){
+    try{
+        //const  =payload
+        console.log('Saga!!!',id)
+        const {data} = yield call(getEventbriteperCategory,id.payload)
+        console.log('From saga Eventbrite category:',data)
+        yield put(fetchEventbriteEventsSaga(data))
+    }catch (e) {
+        console.log(e)
+    }
+
+}
+
 //Wait to load all functions
 function* loadSignup(){
     yield takeEvery(GET_DATA_SAGA,signupSaga);
@@ -77,11 +89,15 @@ function* loadEventbrite() {
     yield takeEvery(GET_EVENTBRITE_SAGA,getEventbriteData)
 }
 
+function* loadEventbriteEvents() {
+    yield takeEvery(GET_EVENTBRITE_EVENTS_SAGA,getEventbritePerCategory)
+}
 function* rootSaga() {
     yield all([
         loadSignup(),
         loadMeetup(),
-        loadEventbrite()
+        loadEventbrite(),
+        loadEventbriteEvents()
     ]);
 }
 
