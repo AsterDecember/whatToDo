@@ -14,6 +14,7 @@ class EventDetail extends Component {
         //throw action to get info from saga
     }
 
+
     render(){
         const {id} = this.state
         console.log(id)
@@ -24,7 +25,8 @@ class EventDetail extends Component {
                 <button onClick={()=> this.props.history.push('/events')}>
                     GoBack
                 </button>
-                <EventCard />
+
+                <EventCard events={this.props.eventbriteDataSaga.events}/>
             </div>
         )
     }
@@ -35,11 +37,11 @@ class EventDetail extends Component {
 //Set the main stage to props i need to use on this component
 const mapStateToProps = (state) => {
     const {
-        eventDetailSaga
+        eventbriteDataSaga
     } = state;
 
     return {
-        eventDetailSaga
+        eventbriteDataSaga
     };
 };
 

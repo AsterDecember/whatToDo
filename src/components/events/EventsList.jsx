@@ -16,8 +16,6 @@ class EventsList extends Component{
         const {categoriesData} = this.props.eventbriteDataSaga ? this.props.eventbriteDataSaga : 'Noinfo'
         return(
             <div>
-                EventList
-
                 <CategoryList categories={this.props.eventbriteDataSaga.categories} />
             </div>
         )

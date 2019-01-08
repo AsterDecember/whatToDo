@@ -1,20 +1,34 @@
-import { Card } from 'antd';
+import { Card, Col, Row } from 'antd';
 import React from 'react'
 
 const { Meta } = Card;
 
-const EventCard = () => {
+const EventCard = (props) => {
+    const renderEvents = () => {
+        const {events} = props
+        return  events ? events.map((e) =>
+            <Col span={8}>
+                <Card
+                    key={e.id}
+                    hoverable
+                    style={{ width: 240 }}
+                    cover={<img alt={e.name} src={e.logo ? e.logo.url:'https://www.freeiconspng.com/uploads/no-image-icon-15.png'} />}
+                >
+                    <Meta
+                        title={e.name.text}
+                        description={e.url}
+                    />
+                </Card>
+            </Col>
+        ) : <h1>No info</h1>
+
+    }
     return(
-        <Card
-            hoverable
-            style={{ width: 240 }}
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-        >
-            <Meta
-                title="Europe Street beat"
-                description="www.instagram.com"
-            />
-        </Card>
+        <div style={{ background: '#ECECEC', padding: '30px' }}>
+            <Row gutter={16}>
+                {renderEvents()}
+            </Row>
+        </div>
     )
 }
 

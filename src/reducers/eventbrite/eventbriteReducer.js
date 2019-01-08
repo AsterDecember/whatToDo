@@ -3,7 +3,9 @@ import {
     FETCH_EVENTBRITE_SAGA
 } from "../../actions/eventbrite/eventbriteActions";
 
-const eventbriteDataSaga = (state = {}, action) => {
+const eventbriteDataSaga = (state = {
+    events:[],
+}, action) => {
     switch (action.type) {
         //set the data from saga to the state
         case FETCH_EVENTBRITE_SAGA:
