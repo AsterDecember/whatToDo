@@ -31,7 +31,8 @@ export const  getEventbriteperCategory = (id) => {
     console.log('sdk')
     const token = 'OYNITYQ6UQJDJMWBLDNT'
     //this thing actually works
-    return axios.get(`https://www.eventbriteapi.com/v3/events/search/?q=${id}&location.longitude=-99.1332&location.latitude=19.4326&sort_by=date&token=OYNITYQ6UQJDJMWBLDNT&locale=es_ES`)
+    const query = id.replace('&',' ')
+    return axios.get(`https://www.eventbriteapi.com/v3/events/search/?q=${query}&location.longitude=-99.1332&location.latitude=19.4326&sort_by=date&token=OYNITYQ6UQJDJMWBLDNT&locale=es_ES`)
         .then(r=>r)
         .catch(e=>console.log(e))
 }
