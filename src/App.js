@@ -14,7 +14,7 @@ class App extends Component {
       <div className="App">
           <Layout>
               <div className='headBanner'>Header</div>
-              <Content>Content
+              <Content>
                   <Routes/>
               </Content>
               <Footer>Mike ©️</Footer>

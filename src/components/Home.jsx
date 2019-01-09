@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {fetchData} from '../actions/exampleActions';
 import {getDataSaga} from '../actions/exampleSagaAction';
+import EventsList from "./events/EventsList";
 
 class Home extends Component{
     componentDidMount() {
@@ -15,11 +16,7 @@ class Home extends Component{
     render(){
         return(
             <div>
-                Home
-                <input/>
-                <Button variant="contained" onClick={this.props.getDataSaga}  >
-                    GO
-                </Button>
+                <EventsList />
             </div>
         )
     }
