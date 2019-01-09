@@ -31,16 +31,22 @@ export const  getEventbriteperCategory = (id) => {
     console.log('sdk')
     const token = 'OYNITYQ6UQJDJMWBLDNT'
     //this thing actually works
-    return axios.get(`https://www.eventbriteapi.com/v3/events/search/?q=cdmx&categories=${id}&sort_by=date&token=OYNITYQ6UQJDJMWBLDNT&locale=es_ES`)
+    return axios.get(`https://www.eventbriteapi.com/v3/events/search/?q=${id}&location.longitude=-99.1332&location.latitude=19.4326&sort_by=date&token=OYNITYQ6UQJDJMWBLDNT&locale=es_ES`)
         .then(r=>r)
         .catch(e=>console.log(e))
 }
 
 export const getMeetupperCategory = (id) => {
-    console.log('meetup')
+    /*console.log('meetup')
     const key = '5f27501b5144525025305c4d3e2e4a1f'
     return axios.get(`https://api.meetup.com/2/open_events.xml?text='Science & Technology'&state=mx&lat=19.43000030517578&lon=-99.13999938964844&key=${key}`)
         .then(r=>r)
-        .catch(e=>console.log(e))
+        .catch(e=>console.log(e))*/
+    return axios.get('https://secure.meetup.com/oauth2/authorize?client_id=vpoumqgm43jcsrvf66q36nqnn7&response_type=code&redirect_uri=https://chatjs-9d06c.firebaseapp.com/events')
+        .then(r=> {
+            console.log(r)
+            return r
+        })
+        .catch( e=>console.log(e))
 }
 

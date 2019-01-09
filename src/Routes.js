@@ -5,9 +5,12 @@ import Login from "./components/auth/Login";
 import Meetup from "./components/events/Meetup";
 import EventsList from "./components/events/EventsList";
 import EventDetail from "./components/events/EventDetail";
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
 
 const Routes = () => (
-    <Switch>
+
+<Switch history={history}>
 
         <Route exact path='/login' component={Login}/>
         <Route exact path='/eventsM' component={Meetup}/>
