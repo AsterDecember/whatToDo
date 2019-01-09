@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
 import Routes from "./Routes";
-import CssBaseline from '@material-ui/core/CssBaseline';
 import 'antd/dist/antd.css'
+import {Layout} from "antd";
+const {
+    Header, Footer, Sider, Content,
+} = Layout;
 
 class App extends Component {
 
   render() {
     return (
       <div className="App">
-        <CssBaseline>
-          <Routes/>
-        </CssBaseline>
+          <Layout>
+              <div className='headBanner'>Header</div>
+              <Content>Content
+                  <Routes/>
+              </Content>
+              <Footer>Mike ©️</Footer>
+          </Layout>
       </div>
     );
   }

@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import CategoryList from './CategoryList'
 import eventbriteDataSaga from "../../reducers/eventbrite/eventbriteReducer";
 import {getMeetupEventsSaga, getMeetupSaga} from "../../actions/meetup/meetupActions";
-import {AutoComplete} from "antd";
+import {AutoComplete, Button, Empty} from "antd";
 import EventCard from "./EventCard";
 
 
@@ -18,7 +18,7 @@ class EventsList extends Component{
     render() {
         console.log(this.props)
         //const {categoriesData} = this.props.eventbriteDataSaga ? this.props.eventbriteDataSaga : 'Noinfo'
-        const categories = this.props.eventbriteDataSaga.categories ? this.props.eventbriteDataSaga.categories.map((e) => e.name) : ['no info']
+        const categories = this.props.eventbriteDataSaga.categories ? this.props.eventbriteDataSaga.categories.map((e) => e.name) : []
         return(
             <div>
                 <AutoComplete
@@ -27,12 +27,15 @@ class EventsList extends Component{
                     placeholder="type a keyword"
                     filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
                     onBlur={(e)=> {
-                        console.log('hey there',e)
                         this.props.getEventbriteEventsSaga(e)
-                        //location.push(`/event/${e}`)
                     }}
                 />
-                {this.props.eventbriteDataSaga.events.length ? <EventCard events={this.props.eventbriteDataSaga.events}/> : <div>no info</div>}
+                <Button shape="circle" icon="search" />
+                {this.props.eventbriteDataSaga.events.length>0 ? <EventCard events={this.props.eventbriteDataSaga.events}/> : <Empty style={{margin:'1rem'}} description={
+                    <span>
+        not events yet <a href="https://www.eventbrite.com/signin/?referrer=%2Fcreate">Go create one</a>
+      </span>
+                }/>}
             </div>
         )
     }
