@@ -1,7 +1,5 @@
 import React,{Component} from 'react'
-import {
-    Form, Icon, Input, Button,
-} from 'antd';
+import {Icon, Input, Button} from 'antd';
 import {bindActionCreators} from "redux";
 import {getLoginSaga} from "../../actions/auth/authActions";
 import {connect} from "react-redux";

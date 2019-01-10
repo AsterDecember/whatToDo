@@ -6,6 +6,8 @@ export const GET_EVENTBRITE_EVENTS_SAGA = 'GET_EVENTBRITE_EVENTS_SAGA'
 export const GET_KEYWORD = 'GET_KEYWORD'
 export const ADD_EVENTBRITE_EVENT_SAGA = 'ADD_EVENTBRITE_EVENT_SAGA'
 export const FETCH_EVENT_DB = 'FETCH_EVENT_DB'
+export const FETCH_EVENTS_DB = 'FETCH_EVENTS_DB'
+export const GET_EVENTS_DB = 'GET_EVENTS_DB'
 
 //Action Creators
 export const fetchEventbriteSaga = (payload) => ({
@@ -33,6 +35,7 @@ export const getKeyword = (payload) => ({
     payload
 })
 
+//Events to my own API
 export const addEventbriteEventSaga = (payload) => ({
     type: ADD_EVENTBRITE_EVENT_SAGA,
     payload
@@ -40,5 +43,15 @@ export const addEventbriteEventSaga = (payload) => ({
 
 export const fetchEventDB = (payload) => ({
     type: FETCH_EVENT_DB,
+    payload
+})
+
+export const getEventsDBAction = (payload) => ({
+    type: GET_EVENTS_DB,
+    payload
+})
+
+export const fetchEventsDB = (payload) => ({
+    type: FETCH_EVENTS_DB,
     payload
 })

@@ -1,4 +1,4 @@
-import {CLEAN_USER, FETCH_LOGIN_SAGA} from "../../actions/auth/authActions";
+import { FETCH_LOGIN_SAGA} from "../../actions/auth/authActions";
 
 const authDataSaga = (state = {
     user:{}

@@ -1,6 +1,6 @@
 import axios from 'axios';
-const host = 'https://api.meetup.com/2/events'
-const dev_api = 'http://localhost:3000/api/'
+//const host = 'https://api.meetup.com/2/events'
+//const dev_api = 'http://localhost:3000/api/'
 const prod_api = 'https://floating-plains-96602.herokuapp.com/api/'
 
 export const getMeetup = ()=>{
@@ -54,7 +54,7 @@ export const getMeetupperCategory = (id) => {
 
 export const createEventDB = (event,userId) => {
     console.log(event)
-    return axios.post(`${dev_api}/event`, {
+    return axios.post(`${prod_api}/event`, {
         id: event.id,
         url: event.url,
         start: event.start.utc,
@@ -64,10 +64,19 @@ export const createEventDB = (event,userId) => {
             _id:userId
         }
     })
-        .then(function (response) {
-            console.log(response);
+        .then(r=> {
+            console.log(r)
+            return r
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch( e=>console.log(e))
+
+}
+
+export const getEventsDBAPI = (id) =>{
+    return axios.get(`${prod_api}/event/${id}`)
+        .then(r=> {
+            console.log(r)
+            return r
+        })
+        .catch( e=>console.log(e))
 }

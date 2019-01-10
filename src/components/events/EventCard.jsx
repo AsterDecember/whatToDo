@@ -1,4 +1,4 @@
-import { Card, Col, Row, Button} from 'antd';
+import { Card,Button} from 'antd';
 import React from 'react'
 
 const { Meta } = Card;
@@ -8,11 +8,9 @@ const EventCard = (props) => {
     const renderEvents = () => {
         const {events,loged,userId} = props
         const {addEvent} = props
-        //console.log(addEvent)
         return  events ? events.map((element) => {
                 var date = new Date(element.start.utc)
                 date.toString()
-                console.log('en el on map:',addEvent)
                  return (<div className='singleCard' key={element.id} >
                     <Card
 
@@ -28,9 +26,9 @@ const EventCard = (props) => {
                         <a href={element.url} target="_blank">
                             <Button type="primary" block>More information</Button>
                         </a>
-                        <Button block onClick={()=>{
+                        {loged && <Button block onClick={()=>{
                             addEvent({element,userId})
-                        }}>Add event</Button>
+                        }}>Add event</Button>}
                     </Card>
                 </div>)
             }

@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import EventsList from "./events/EventsList";
 import {getLoginSaga} from "../actions/auth/authActions";
-import { Menu, Icon, Modal, Button, Tabs } from 'antd';
+import { Modal, Button, Tabs } from 'antd';
 import Login from "./auth/Login"
-import { Alert } from 'antd';
 import Profile from "./auth/Profile";
 const TabPane = Tabs.TabPane
 
@@ -65,7 +64,6 @@ class Home extends Component{
                             password:'1234'
                         })*/
                         this.showModal()
-                        console.log('Login')
                     }}>Login</Button>
                     </TabPane>}
                 </Tabs>

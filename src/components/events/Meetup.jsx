@@ -2,7 +2,6 @@ import React,{Component} from 'react'
 import {bindActionCreators} from "redux";
 import {getMeetupSaga} from "../../actions/meetup/meetupActions";
 import {connect} from "react-redux";
-import axios from 'axios'
 
 class Meetup extends Component{
     componentWillMount() {

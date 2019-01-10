@@ -6,9 +6,6 @@ import {
     getEventbriteSaga
 } from "../../actions/eventbrite/eventbriteActions";
 import {connect} from "react-redux";
-import CategoryList from './CategoryList'
-import eventbriteDataSaga from "../../reducers/eventbrite/eventbriteReducer";
-import {getMeetupEventsSaga, getMeetupSaga} from "../../actions/meetup/meetupActions";
 import {AutoComplete, Button, Empty, Row} from "antd";
 import EventCard from "./EventCard";
 
@@ -22,11 +19,9 @@ class EventsList extends Component{
     }
 
     render() {
-        console.log(this.props)
         //const {categoriesData} = this.props.eventbriteDataSaga ? this.props.eventbriteDataSaga : 'Noinfo'
         const categories = this.props.eventbriteDataSaga.categories ? this.props.eventbriteDataSaga.categories.map((e) => e.name) : []
         const loged = !!this.props.authDataSaga.user._id
-        console.log('Estas logeao? :3?',loged)
         return(
             <div>
                 <AutoComplete
