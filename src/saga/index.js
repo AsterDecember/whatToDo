@@ -1,7 +1,10 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import {GET_DATA_SAGA,fetchDataSaga} from "../actions/exampleSagaAction";
-import {getEventbriteperCategory, getMeetup, getMeetupperCategory} from '../middleware/events'
+import {createEventDB, getEventbriteperCategory, getMeetup, getMeetupperCategory} from '../middleware/events'
 import {getEventbrite} from '../middleware/events'
+import {
+    login
+} from "../middleware/auth"
 import {
     GET_MEETUP_SAGA,
     fetchMeetupSaga,
@@ -11,18 +14,18 @@ import {
 import {
     GET_EVENTBRITE_SAGA,
     fetchEventbriteSaga,
-    fetchEventbriteEventsSaga, GET_EVENTBRITE_EVENTS_SAGA
+    fetchEventbriteEventsSaga, GET_EVENTBRITE_EVENTS_SAGA, ADD_EVENTBRITE_EVENT_SAGA, fetchEventDB
 } from "../actions/eventbrite/eventbriteActions";
+import {fetchLoginSaga, GET_LOGIN_SAGA} from "../actions/auth/authActions";
 
-function* loginSaga() {
+
+//----------------------------------------------------
+//--------------Auth Functions -----------------------
+//----------------------------------------------------
+function* loginSaga(payload) {
     try{
-        //const {data} = yield call(signup);
-        const dataSaga = {
-            description : "Saga info",
-            id: 1
-        }
-        console.log('saga O:',dataSaga)
-        yield put(fetchDataSaga({dataSaga}));
+        const {data} = yield call(login,payload)
+        yield put(fetchLoginSaga(data));
 
     } catch (e) {
         console.log(e)
@@ -36,7 +39,6 @@ function* signupSaga() {
             description : "Saga info",
             id: 1
         }
-        console.log('saga O:',dataSaga)
         yield put(fetchDataSaga({dataSaga}));
         
     } catch (e) {
@@ -71,7 +73,6 @@ function* getEventbriteData() {
 function* getEventbritePerCategory(id){
     try{
         //const  =payload
-        console.log('Saga!!!',id)
         const {data} = yield call(getEventbriteperCategory,id.payload)
         console.log('From saga Eventbrite category:',data)
         yield put(fetchEventbriteEventsSaga(data))
@@ -80,7 +81,7 @@ function* getEventbritePerCategory(id){
     }
 }
 
-function * getMeetupPerCategory(id){
+function* getMeetupPerCategory(id){
     try{
         const {data} = yield call(getMeetupperCategory,id.payload)
         yield put(fetchMeetupEventsSaga(data))
@@ -89,14 +90,26 @@ function * getMeetupPerCategory(id){
     }
 }
 
-//Wait to load all functions
-function* loadSignup(){
-    yield takeEvery(GET_DATA_SAGA,signupSaga);
+function* addEventDB(info) {
+    try{
+        const {element,userId} = info.payload
+
+        const {data} = yield call(createEventDB,element,userId)
+        yield put(fetchEventDB(data))
+    }catch (e) {
+        console.log(e)
+    }
 }
 
-function* loadMeetup() {
-    yield takeEvery(GET_MEETUP_SAGA,getMeetupData)
+//Wait to load all functions
+function* loadLogin(){
+    yield takeEvery(GET_LOGIN_SAGA,loginSaga);
 }
+/*
+
+function* loadMeetup() {
+    yield takeEvery(GET_LOGIN_SAGA,signupSaga)
+}*/
 
 function* loadEventbrite() {
     yield takeEvery(GET_EVENTBRITE_SAGA,getEventbriteData)
@@ -109,13 +122,18 @@ function* loadEventbriteEvents() {
 function* loadMeetupEvents() {
     yield takeEvery(GET_MEETUP_EVENTS_SAGA,getMeetupPerCategory)
 }
+
+function* loadAddEvents() {
+    yield takeEvery(ADD_EVENTBRITE_EVENT_SAGA,addEventDB)
+}
+
 function* rootSaga() {
     yield all([
-        loadSignup(),
-        loadMeetup(),
+        loadLogin(),
         loadEventbrite(),
         loadEventbriteEvents(),
-        loadMeetupEvents()
+        loadMeetupEvents(),
+        loadAddEvents()
     ]);
 }
 

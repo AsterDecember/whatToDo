@@ -1,22 +1,75 @@
 import React,{Component} from 'react'
-import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {fetchData} from '../actions/exampleActions';
-import {getDataSaga} from '../actions/exampleSagaAction';
 import EventsList from "./events/EventsList";
+import {getLoginSaga} from "../actions/auth/authActions";
+import { Menu, Icon, Modal, Button, Tabs } from 'antd';
+import Login from "./auth/Login"
+import { Alert } from 'antd';
+import Profile from "./auth/Profile";
+const TabPane = Tabs.TabPane
+
+function callback(key) {
+    console.log(key);
+}
 
 class Home extends Component{
-    componentDidMount() {
-        this.props.fetchData();
+    state = { visible: false }
+
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
     }
-    triggerAction = () =>{
-        console.log(this.props)
+
+    handleOk = (e) => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
     }
+
+    handleCancel = (e) => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    }
+
     render(){
         return(
             <div>
-                <EventsList />
+
+                <Modal
+                    title="Login"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                >
+                    <Login close={this.handleOk} />
+
+                </Modal>
+
+                <Tabs defaultActiveKey="1" onChange={callback}>
+                    <TabPane tab="Events" key="1">
+                        <EventsList />
+                    </TabPane>
+                    {this.props.authDataSaga.user._id ? <TabPane tab="Profile" key="2">
+                        <Profile/>
+                    </TabPane> : <TabPane tab="Login"  key="2">
+                        <Button onClick={()=> {
+
+                        /*this.props.getLoginSaga({
+                            name:'mike',
+                            email:'mike@correo.com',
+                            password:'1234'
+                        })*/
+                        this.showModal()
+                        console.log('Login')
+                    }}>Login</Button>
+                    </TabPane>}
+                </Tabs>
+
             </div>
         )
     }
@@ -26,11 +79,11 @@ class Home extends Component{
 //Set the main stage to props i need to use on this component
 const mapStateToProps = (state) => {
     const {
-        exampleData
+        authDataSaga
     } = state;
 
     return {
-        exampleData
+        authDataSaga
     };
 };
 
@@ -38,8 +91,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
     return bindActionCreators({
-        fetchData,
-        getDataSaga
+        getLoginSaga
     }, dispatch);
 
 };

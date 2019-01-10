@@ -35,9 +35,46 @@
   background-color: #00B7FF;
 }
 .headBanner{
+  background-color: #351220;
   background-image: url("./assets/banner.png");
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 50vw;
+  height: 30vw;
+}
+
+.ant-select-show-search{
+  margin: 1rem !important;
+}
+
+.cards{
+  width: 90%;
+  margin: 0 auto;
+
+}
+.singleCard{
+  width: 250px;
+  flex-grow: 1;
+}
+
+.boxCard{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ant-btn-primary, .ant-btn{
+  background-color: #350d23 !important;
+  color: white !important;
+  border: none !important;
+  margin-top: 1rem !important;
+}
+.ant-btn:hover, .ant-btn:focus{
+  background-color: #1F0714 !important;
+  font-weight: bold !important;
+}
+
+.ant-tabs-tab:hover, .ant-tabs-tab:focus, .ant-tabs-tab:active,.ant-tabs-tab-active{
+  color: #350d23 !important;
 }

@@ -4,38 +4,44 @@ import React from 'react'
 const { Meta } = Card;
 
 const EventCard = (props) => {
+
     const renderEvents = () => {
-        const {events} = props
-        return  events ? events.map((e) => {
-                var date = new Date(e.start.utc)
+        const {events,loged,userId} = props
+        const {addEvent} = props
+        //console.log(addEvent)
+        return  events ? events.map((element) => {
+                var date = new Date(element.start.utc)
                 date.toString()
-                console.log('this info:',date)
-                 return <Col key={e.id} span={8}>
+                console.log('en el on map:',addEvent)
+                 return (<div className='singleCard' key={element.id} >
                     <Card
 
                         hoverable
                         style={{width: 240, marginTop: '1rem'}}
-                        cover={<img alt={e.name}
-                                    src={e.logo ? e.logo.url : 'https://www.valuewalk.com/wp-content/uploads/2017/04/no-thumbnail.png'}/>}
+                        cover={<img alt={element.name}
+                                    src={element.logo ? element.logo.url : 'https://www.valuewalk.com/wp-content/uploads/2017/04/no-thumbnail.png'}/>}
                     >
                         <Meta
-                            title={e.name.text}
+                            title={element.name.text}
                             description={date.toString()}
                         />
-                        <a href={e.url}>
+                        <a href={element.url} target="_blank">
                             <Button type="primary" block>More information</Button>
                         </a>
+                        <Button block onClick={()=>{
+                            addEvent({element,userId})
+                        }}>Add event</Button>
                     </Card>
-                </Col>
+                </div>)
             }
         ) : <h1>No info</h1>
 
     }
     return(
         <div style={{ background: '#ECECEC', padding: '30px' }}>
-            <Row gutter={16}>
+            <div className='boxCard'>
                 {renderEvents()}
-            </Row>
+            </div>
         </div>
     )
 }

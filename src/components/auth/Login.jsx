@@ -1,49 +1,85 @@
 import React,{Component} from 'react'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import {
+    Form, Icon, Input, Button,
+} from 'antd';
+import {bindActionCreators} from "redux";
+import {getLoginSaga} from "../../actions/auth/authActions";
+import {connect} from "react-redux";
 
 
 class Login extends Component{
-    state={
-        user:{}
+    state = {
+        user:{
+            email: '',
+            password: ''
+        }
     }
 
-    handleChange = (e)=>{
+    handleChange = (e) => {
         const {user} = this.state
-        const field = e.target.name
-        user[field] = e.target.value
+        user[e.target.name]=e.target.value
         this.setState({user})
     }
-    login = (e)=>{
-        e.preventDefault()
-        console.log(this.state)
+
+    logIn = () =>{
+        console.log('logIn')
+        const {user} = this.state
+        console.log(user)
+        this.props.getLoginSaga(user)
     }
+
     render() {
+        const { email,password } = this.state.user;
+        if(this.props.authDataSaga.user._id){
+            console.log('loged')
+            this.props.close()
+        }
         return(
             <div>
-                <form method="POST" onSubmit={this.login}>
-                    <TextField
-                        id="standard-name"
-                        label="Name"
-                        name="name"
-                        onChange={this.handleChange}
-                        margin="normal"
-                    />
-                    <TextField
-                        id="standard-name"
-                        label="Email"
-                        name="email"
-                        onChange={this.handleChange}
-                        margin="normal"
-                    />
-                    <Button variant="contained" type="Submit"  >
-                        GO
-                    </Button>
-                </form>
+                <Input
+                    style={{marginBottom:'1rem'}}
+                    name='email'
+                    placeholder="Enter your email"
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    value={email}
+                    onChange={this.handleChange}
+                    ref={node => this.userNameInput = node}
+                />
+                <Input.Password
+                    style={{marginBottom:'1rem'}}
+                    name='password'
+                    placeholder="Password"
+                    value={password}
+                    onChange={this.handleChange}
+                />
+                <Button className='buttonWine' type="primary" onClick={this.logIn}>GO</Button>
             </div>
         )
     }
 
 }
 
-export default Login
+//Set the main stage to props i need to use on this component
+const mapStateToProps = (state) => {
+    const {
+        authDataSaga
+    } = state;
+
+    return {
+        authDataSaga
+    };
+};
+
+
+//Set the acction is going to be trigerred on this component
+const mapDispatchToProps = (dispatch) => {
+
+    return bindActionCreators({
+        getLoginSaga
+    }, dispatch);
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+
