@@ -8,28 +8,7 @@
 
   - Show eventbrite filtered open events
   - Show the events you saved
-
-#Backend
-
-### Tech
-
-Back:
-* [JS] - The main tool for this proyect!.
-* [node.js] - Evented I/O for the backend.
-* [Express] - Fast node.js network app framework. 
-* [Passport] - Authentication middleware for Node.js. 
-
-### Installation
-
-"What to Do" requires [Node.js](https://nodejs.org/).
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd whatToDoBack
-$ npm install -i
-$ npm run dev 
-```
+  
 
 # Frontend
 
@@ -88,3 +67,25 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+# Backend
+
+### Tech
+
+Back:
+* [JS] - The main tool for this proyect!.
+* [node.js] - Evented I/O for the backend.
+* [Express] - Fast node.js network app framework. 
+* [Passport] - Authentication middleware for Node.js. 
+
+### Installation
+
+"What to Do" requires [Node.js](https://nodejs.org/).
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+$ cd whatToDoBack
+$ npm install -i
+$ npm run dev 
+```
