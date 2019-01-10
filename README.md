@@ -1,3 +1,49 @@
+# What to Do in Mexico City
+
+[![N|Solid](https://www.emagister.com/es/albums/6/0/5/4/0/xl_cropped_a7bbf2c4d2c1981b6da999bad8c4a5d2.png)](https://nodesource.com/products/nsolid)
+
+
+
+"What to Do" shows events filtered by a keyword you give
+
+  - Show eventbrite filtered open events
+  - Show the events you saved
+
+#Backend
+
+### Tech
+
+Back:
+* [JS] - The main tool for this proyect!.
+* [node.js] - Evented I/O for the backend.
+* [Express] - Fast node.js network app framework. 
+* [Passport] - Authentication middleware for Node.js. 
+
+### Installation
+
+"What to Do" requires [Node.js](https://nodejs.org/).
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+$ cd whatToDoBack
+$ npm install -i
+$ npm run dev 
+```
+
+# Frontend
+
+### Tech
+
+Front:
+* [JS] - Also used on front.
+* [redux] - 
+A predictable state container for JavaScript apps.
+* [redux-saga] - Redux middleware library, that is designed to make handling side effects. 
+
+
+[Repo url!!!!](https://github.com/AsterDecember/whatToDo).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
