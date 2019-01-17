@@ -80,3 +80,12 @@ export const getEventsDBAPI = (id) =>{
         })
         .catch( e=>console.log(e))
 }
+
+export const deleteEventDBAPI = (id) =>{
+    return axios.delete(`${prod_api}/event/${id}`)
+        .then(r=> {
+            console.log(r)
+            return r
+        })
+        .catch( e=>console.log(e))
+}

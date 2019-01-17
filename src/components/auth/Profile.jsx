@@ -9,6 +9,9 @@ class Profile extends Component {
         this.props.getEventsDBAction(this.props.authDataSaga.user._id)
     }
 
+    deleteEvent (element){
+        console.log('delete:',element)
+    }
 
     render() {
         const {userEvents} = this.props.eventbriteDataSaga
@@ -27,7 +30,9 @@ class Profile extends Component {
                                 title={<a href={item.url} target="_blank">{item.name}</a>}
                                 description={item.start}
                             />
+                            <Button onClick={this.deleteEvent(item)}>Delete</Button>
                         </List.Item>
+
                     )}
                 />
             </div>

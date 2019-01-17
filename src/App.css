@@ -75,6 +75,9 @@
   font-weight: bold !important;
 }
 
+.ant-tabs-tab{
+  font-size: 1.5em;
+}
 .ant-tabs-tab:hover, .ant-tabs-tab:focus, .ant-tabs-tab:active,.ant-tabs-tab-active{
   color: #350d23 !important;
 }

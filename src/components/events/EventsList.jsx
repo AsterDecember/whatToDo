@@ -24,6 +24,7 @@ class EventsList extends Component{
         const loged = !!this.props.authDataSaga.user._id
         return(
             <div>
+                <h2>Type a word to show events</h2>
                 <AutoComplete
                     style={{ width: 200 }}
                     dataSource={categories}

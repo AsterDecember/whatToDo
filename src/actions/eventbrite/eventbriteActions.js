@@ -8,6 +8,7 @@ export const ADD_EVENTBRITE_EVENT_SAGA = 'ADD_EVENTBRITE_EVENT_SAGA'
 export const FETCH_EVENT_DB = 'FETCH_EVENT_DB'
 export const FETCH_EVENTS_DB = 'FETCH_EVENTS_DB'
 export const GET_EVENTS_DB = 'GET_EVENTS_DB'
+export const GET_DELETE_EVENT_DB = 'GET_DELETE_EVENT_DB'
 
 //Action Creators
 export const fetchEventbriteSaga = (payload) => ({
@@ -53,5 +54,10 @@ export const getEventsDBAction = (payload) => ({
 
 export const fetchEventsDB = (payload) => ({
     type: FETCH_EVENTS_DB,
+    payload
+})
+
+export const getDeleteEventDB = (payload) => ({
+    type: GET_DELETE_EVENT_DB,
     payload
 })

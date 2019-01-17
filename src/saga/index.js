@@ -1,7 +1,7 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import {fetchDataSaga} from "../actions/exampleSagaAction";
 import {
-    createEventDB,
+    createEventDB, deleteEventDBAPI,
     getEventbriteperCategory,
     getEventsDBAPI,
     getMeetup,
@@ -24,7 +24,7 @@ import {
     ADD_EVENTBRITE_EVENT_SAGA,
     fetchEventDB,
     GET_EVENTS_DB,
-    fetchEventsDB, getEventsDBAction
+    fetchEventsDB, getEventsDBAction, GET_DELETE_EVENT_DB
 } from "../actions/eventbrite/eventbriteActions";
 import {fetchLoginSaga, GET_LOGIN_SAGA} from "../actions/auth/authActions";
 
@@ -120,6 +120,12 @@ function* getEventsDB(info) {
     }
 }
 
+function* deleteEventDB(info) {
+    const {id,userId} = info.payload
+    const {data} = yield call(deleteEventDBAPI,id)
+    yield put(getEventsDBAction(userId))
+}
+
 //Wait to load all functions
 function* loadLogin(){
     yield takeEvery(GET_LOGIN_SAGA,loginSaga);
@@ -150,6 +156,10 @@ function* loadGetEvents() {
     yield takeEvery(GET_EVENTS_DB,getEventsDB)
 }
 
+function* loadDeleteEvent() {
+    yield takeEvery(GET_DELETE_EVENT_DB,deleteEventDB)
+}
+
 function* rootSaga() {
     yield all([
         loadLogin(),
@@ -157,7 +167,8 @@ function* rootSaga() {
         loadEventbriteEvents(),
         loadMeetupEvents(),
         loadAddEvents(),
-        loadGetEvents()
+        loadGetEvents(),
+        loadDeleteEvent()
     ]);
 }
 
